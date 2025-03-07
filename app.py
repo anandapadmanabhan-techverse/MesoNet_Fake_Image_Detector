@@ -1,13 +1,21 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from tensorflow.keras.preprocessing import image
 import numpy as np
+from io import BytesIO
 from meso import model  # This should run meso.py, which loads the model
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 def preprocess_image(file):
-    # Load the image with the right target size
-    img = image.load_img(file, target_size=(256, 256))
+    # Convert the file stream to a BytesIO object
+    file_bytes = BytesIO(file.read())
+    file_bytes.seek(0)
+    
+    # Load the image with the right target size from the BytesIO object
+    img = image.load_img(file_bytes, target_size=(256, 256))
+    
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)  # add batch dimension
     img_array /= 255.0  # normalize pixel values
