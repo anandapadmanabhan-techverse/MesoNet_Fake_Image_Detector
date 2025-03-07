@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> MesoNet Image Detector</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="navbar-title">MesoNet Image Detector</div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro-section">
+        <h1>Upload an Image to Detect Deepfake</h1>
+        <p>
+            MesoNet is a deep learning model that can detect deepfake images. It uses a pre-trained model to predict the probability of an image being a deepfake. Upload an image to see the prediction.
+        </p>
+        <hr class="divider">
+    </section>
+
+    <section class="upload-section">
+      <div class="upload-card">
+        <h2>Upload the Image</h2>
+        <!-- Hidden file input -->
+        <input type="file" id="imageInput" accept="image/*" class="hidden-input" />
+        <!-- Visible button to trigger file input -->
+        <button class="upload-btn" onclick="triggerFileInput()">Upload Image</button>
+        <p class="note">Note: Clear, high-resolution images provide better detection accuracy.</p>
+      </div>
+    </section>
+
+    <!-- Preview & Prediction -->
+    <section class="preview-section hidden" id="predictionSection">
+      <img id="preview" class="preview-img hidden" />
+      <button onclick="uploadImage()" class="predict-btn">Predict</button>
+    </section>
+
+    <section class="results-section hidden" id="resultsSection">
+      <h3 id="result"></h3>
+      <h4 id="confidence"></h4>
+      <pre id="metadata"></pre>
+    </section>
+  </main>
+
+  <!-- Link to external JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>
